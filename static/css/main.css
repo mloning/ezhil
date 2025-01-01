@@ -71,32 +71,31 @@ textarea {
 
 /*block quotes*/
 blockquote {
-    margin-left: 1rem;
+    color: #9198a1;
+    font-family: "Ubuntu", sans-serif;
+    font-size: 1rem;
     font-style: italic;
-    font-size: 1.4rem;
-    font-family: Georgia, bitstream charter, serif;
-    border-left: 3px solid;
-    border-color: #15ab88;
-    padding-left: 20px;
+    line-height: 1.4;
+    margin-left: 1rem;
+    padding-left: 15px;
+    margin: 0;
+    padding: 0 1em;
+    border-left: 0.25em solid #f5f7f9;
 }
 
 blockquote cite {
     font-size: 70%;
-    opacity: .8;
-}
-
-blockquote em {
-    font-weight: 600;
+    opacity: 0.8;
 }
 
 a,
 a:hover {
     color: #15ab88;
-    text-decoration: none
+    text-decoration: none;
 }
 
 a:hover {
-    text-decoration: underline
+    text-decoration: underline;
 }
 
 /*headings*/
@@ -133,7 +132,7 @@ h5 {
 }
 
 h6 {
-    font-size: .9rem;
+    font-size: 0.9rem;
 }
 
 .align-center {
@@ -171,7 +170,7 @@ ul.flat li {
 }
 
 .prevent-collapse {
-    min-height: .1rem
+    min-height: 0.1rem;
 }
 
 .page-title {
@@ -441,4 +440,3 @@ table td {
         margin-top: 10px;
     }
 }
-
