@@ -161,6 +161,13 @@ ul {
     list-style-position: outside;
 }
 
+ul li {
+    display: list-item;
+    margin-left: 0;
+    margin-bottom: 0;
+    line-height: 1.4;
+}
+
 ul.flat {
     margin: 0;
     padding: 0;
