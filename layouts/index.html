@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 {{ partial "header.html" . }}
+
 <body>
 	<div class="container wrapper">
 		{{ partial "head.html" . }}
@@ -16,15 +17,16 @@
 				{{ $paginator := .Paginate (where $pages "Params.hidden" "ne" true) }}
 				{{ range $paginator.Pages }}
 				<div class="post">
-					<div class="meta">{{ dateFormat "Jan 2, 2006" .Date }}{{ if .Draft }} <span class="draft-label">DRAFT</span> {{ end }}</div>
-					<a class="title" href="{{ .RelPermalink }}">{{.Title}}</a> &mdash;
-					<span class="description">
+					<div class="meta">{{ dateFormat "Jan 2, 2006" .Date }}{{ if .Draft }} <span
+							class="draft-label">DRAFT</span> {{ end }}</div>
+					<p class="summary-paragraph">
+						<a class="title" href="{{ .RelPermalink }}">{{.Title}}</a> &mdash;
 						{{ if isset .Params "description" }}
 						{{ .Description }}
 						{{ else }}
-						{{ .Summary }}&hellip;
+						{{ .Summary | plainify | truncate 400 }}
 						{{ end }}
-					</span>
+					</p>
 				</div>
 				{{ end }}
 				{{ template "partials/paginator.html" . }}
@@ -33,4 +35,5 @@
 	</div>
 	{{ partial "footer.html" . }}
 </body>
+
 </html>
