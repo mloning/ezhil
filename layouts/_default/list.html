@@ -9,7 +9,20 @@
 		{{ if isset .Data "Term" }}
 			<h1>Entries tagged - "{{ .Data.Term }}"</h1>
 		{{ else }}
-			<h1 class="page-title">All articles</h1>
+			<h1 class="page-title">Posts</h1>
+
+			{{/* Show all available tags at the top of the All Posts page (not on individual tag pages). */}}
+			{{ with .Site.Taxonomies.tags }}
+			<div class="post-tags all-tags">
+				<nav class="nav tags">
+					<ul class="flat">
+						{{ range .ByCount }}
+						<li><a href="{{ .Page.RelPermalink }}">{{ .Name }} <span class="tag-count">{{ .Count }}</span></a></li>
+						{{ end }}
+					</ul>
+				</nav>
+			</div>
+			{{ end }}
 		{{ end }}
 
 		{{ with .Content }}{{ . }}{{ end }}

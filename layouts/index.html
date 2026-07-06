@@ -24,9 +24,14 @@
 						{{ if isset .Params "description" }}
 						{{ .Description }}
 						{{ else }}
-						{{ .Summary | plainify | truncate 400 }}
+						{{ .Summary | plainify | htmlUnescape | truncate 400 }}
 						{{ end }}
 					</p>
+					{{ with .Params.tags }}
+					<div class="post-tags">
+						<span class="tags">{{ range . }}{{ $tag := . }}{{ with $.Site.GetPage (printf "/tags/%s" ($tag | urlize)) }}<a href="{{ .RelPermalink }}">{{ $tag }}</a>{{ end }}{{ end }}</span>
+					</div>
+					{{ end }}
 				</div>
 				{{ end }}
 				{{ template "partials/paginator.html" . }}

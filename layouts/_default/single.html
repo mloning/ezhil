@@ -8,25 +8,29 @@
 		<div class="post-header">
 			<h1 class="title">{{ .Title }}</h1>
 			<div class="meta">Posted at {{ dateFormat "Jan 2, 2006 15:04:05" .Date}} &mdash; Last modified at {{ dateFormat "Jan 2, 2006 15:04:05" .Lastmod}}{{ if .Draft }} <span class="draft-label">DRAFT</span> {{ end }}</div>
+
+			{{ if ne .Type "page" }}
+			{{ with .Params.tags }}
+			<div class="post-tags">
+				<nav class="nav tags">
+					<ul class="flat">
+						{{ range . }}
+						{{ $tag := . }}
+						{{ with $.Site.GetPage (printf "/tags/%s" ($tag | urlize)) }}
+						<li><a href="{{ .RelPermalink }}">{{ $tag }}</a></li>
+						{{ end }}
+						{{ end }}
+					</ul>
+				</nav>
+			</div>
+			{{ end }}
+			{{ end }}
 		</div>
 
 		<div class="markdown">
 			{{ .Content }}
 		</div>
 
-		<div class="post-tags">
-			{{ if ne .Type "page" }}
-				{{ if gt .Params.tags 0 }}
-					<nav class="nav tags">
-							<ul class="flat">
-								{{ range .Params.tags }}
-								<li><a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a></li>
-								{{ end }}
-							</ul>
-					</nav>
-				{{ end }}
-			{{ end }}
-		</div>
 		{{- $.Scratch.Set "isDisqus" true -}}
 
 		<!-- Disable if content type is excluded in config -->
